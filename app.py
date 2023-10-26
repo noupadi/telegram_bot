@@ -11,11 +11,19 @@ logging.basicConfig(
     level=logging.INFO
 )
 
+
+
+
+
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(
         chat_id=update.effective_chat.id, 
         text="I'm a bot, please talk to me!"
         )
+
+
+
+
 
 # async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
 #     await context.bot.send_message(chat_id=update.effective_chat.id, text=update.message.text)
@@ -24,6 +32,11 @@ async def caps(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text_caps = ' '.join(context.args).upper()
     await context.bot.send_message(chat_id=update.effective_chat.id, text=text_caps)
 
+
+
+
+
+# inline_query function to learn about inline query
 async def inline_caps(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.inline_query.query
     if not query:
@@ -38,11 +51,17 @@ async def inline_caps(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
     await context.bot.answer_inline_query(update.inline_query.id, results)
 
+
+
+# Handling of unknown requests / commands
 async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(chat_id=update.effective_chat.id, text="Sorry, I didn't understand that command. type /help to get all available commands")
 
 
 
+
+
+# Help message updated mechanicaly
 async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     help_message = """
     /help - Show this help message
@@ -50,6 +69,8 @@ async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     @poltt0aine_bot (input text) to use the bot to send msg.
     """
     await context.bot.send_message(chat_id=update.effective_chat.id, text=help_message)
+
+
 
 # Command function to fetch and display fuel prices
 async def fuelprices(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -62,6 +83,9 @@ async def fuelprices(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         message = "Failed to retrieve fuel prices."
         await context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+
+
+
 
 # Function to fetch and parse fuel prices from the webpage
 def fetch_fuel_prices(url):
