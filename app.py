@@ -1,6 +1,7 @@
-import logging
+import logging, datetime
 from telegram import Update, InlineQueryResultArticle, InputTextMessageContent
 from telegram.ext import filters, MessageHandler, ApplicationBuilder, ContextTypes, CommandHandler, InlineQueryHandler
+from datetime import date
 
 import requests
 from bs4 import BeautifulSoup
@@ -11,17 +12,11 @@ logging.basicConfig(
     level=logging.INFO
 )
 
-
-
-
-
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(
         chat_id=update.effective_chat.id, 
         text="I'm a bot, please talk to me!"
         )
-
-
 
 
 
@@ -71,22 +66,6 @@ async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(chat_id=update.effective_chat.id, text=help_message)
 
 
-
-# Command function to fetch and display fuel prices
-async def fuelprices(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    url = "https://www.tankille.fi/suomi/"
-    prices = fetch_fuel_prices(url)
-    
-    if prices:
-        message = f"95 {prices[0]} \n98 {prices[1]} \nDiesel {prices[2]} \n(prices are for last 24 hours, source: https://www.tankille.fi/suomi/)"
-        await context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-    else:
-        message = "Failed to retrieve fuel prices."
-        await context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-
-
-
-
 # Function to fetch and parse fuel prices from the webpage
 def fetch_fuel_prices(url):
     try:
@@ -99,6 +78,21 @@ def fetch_fuel_prices(url):
             return [price.get_text() for price in prices]
     except Exception as e:
         print(f"An error occurred: {e}")
+
+
+# Command function to fetch and display fuel prices
+async def fuelprices(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    url = "https://www.tankille.fi/suomi/"
+    prices = fetch_fuel_prices(url)
+    
+    if prices:
+        message = f"95 {prices[0]} \n98 {prices[1]} \nDiesel {prices[2]} \n(prices are for last 24 hours, source: https://www.tankille.fi/suomi/)"
+        # with open('hintatietoja.txt', 'r'):
+        await context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+    else:
+        message = "Failed to retrieve fuel prices."
+        await context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+
 
 
 if __name__ == '__main__':
