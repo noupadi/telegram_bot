@@ -96,8 +96,13 @@ async def fuelprices(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 if __name__ == '__main__':
-    
-    application = ApplicationBuilder().token('6379170697:AAH38nT_w93ufverF8ki6xClntoMKwpnRU8').build()
+    file_url = input("insert file path")
+    token = ''
+    if token == '':
+        with open(file_url, 'r') as file:
+            token = file.read()
+
+    application = ApplicationBuilder().token('token').build()
     
     start_handler = CommandHandler('start', start)
     # echo_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), echo)
