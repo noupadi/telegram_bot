@@ -33,9 +33,9 @@ def fuelprices():
         def keraa_tiedot_tietokantaan(file_name, data):
             data_dict = {
                 str(datetime.date.today()): {
-                    'E95': data[0],
-                    'E98': data[1],
-                    'Diesel': data[2]
+                    "E95": data[0],
+                    "E98": data[1],
+                    "Diesel": data[2]
                 }
             }
             #writing to jsonfile
