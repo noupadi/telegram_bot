@@ -89,13 +89,11 @@ async def fuelprices(update: Update, context: ContextTypes.DEFAULT_TYPE):
             data = {"prices": []}
         return data
 
-
     async def save_json_data_to_file(new_json_data):
         with open('fuel_data.json', 'w') as file:
             json.dump(new_json_data, file, indent=4)
             file.close
         return
-
 
     async def save_fuel_data(prices):
         json_data = read_jsonfile_into_variable()
@@ -117,7 +115,7 @@ async def fuelprices(update: Update, context: ContextTypes.DEFAULT_TYPE):
         save_json_data_to_file(json_data)
             
     url = "https://www.tankille.fi/suomi/"
-    prices = fetch_fuel_prices(url)
+    prices = await fetch_fuel_prices(url)
     
     save_fuel_data(prices)
     
@@ -166,63 +164,3 @@ if __name__ == '__main__':
     application.run_polling()
 
 
-
-'''
-async def hello(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    update.message.reply_text(f'Hello {update.effective_user.first_name}')
-
-
-def fetch_webpage(url):
-    try:
-        response = requests.get(url)
-        if response.status_code == 200:
-            return response.text
-    except requests.exceptions.RequestException as e:
-        print(f"An error occured: {e}")
-    # await update.message.reply_text(f'Polttoaineen keskihinta suomessa tänään {update.effective_user.first_name}')
-
-
-def extract_data(html_content):
-    osat = html_content.rstrip().split('table')
-    haluttu_osa = osat[1].split('<td>')[2]
-    hinnat = []
-    i = 0
-    hinta = ''
-    for char in haluttu_osa:
-    # print(str(char) + '\n')
-        if char.isdigit():
-            hinta += str(char)
-            i += 1
-            if i == 1:
-                hinta += ','
-        if i < 4:
-            continue
-        else:
-            hinnat.append(hinta)
-            hinta = ''
-            i = 0
-    return hinnat
-
-
-
-    
-def hinta(update: Update, Context: CallbackContext) -> None:
-    url='https://www.polttoaine.net/index.php'
-    html_content = fetch_webpage(url)
-    if html_content:
-        hinnat = extract_data(html_content)
-        update.message.reply_text(f"Eilisen keskihinta; 95: {hinnat[0]}, 98: {hinnat[1]}, diesel:  {hinnat[2]} ")
-    else:
-        update.message.reply_text("Failed to retrieve data.")
-
-
-
-
-app = ApplicationBuilder().token("6379170697:AAH38nT_w93ufverF8ki6xClntoMKwpnRU8").build()
-
-#handler for the '/start' command
-app.add_handler(CommandHandler("hello", hello))
-app.add_handler(CommandHandler("hinta", hinta))
-
-#start the bot
-app.run_polling()'''
