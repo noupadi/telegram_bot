@@ -2,9 +2,37 @@
     "prices": [
         {
             "2023-11-09": {
-                "E95": "Keskiarvo\n        2.024    ",
-                "E98": "Keskiarvo\n        2.122    ",
-                "Diesel": "Keskiarvo\n        2.112    "
+                "E95": "Keskiarvo\n2.024",
+                "E98": "Keskiarvo\n2.122",
+                "Diesel": "Keskiarvo\n2.112"
+            }
+        },
+        {
+            "2023-11-13": {
+                "E95": "Keskiarvo\n1.932",
+                "E98": "Keskiarvo\n2.028",
+                "Diesel": "Keskiarvo\n2.017"
+            }
+        },
+        {
+            "2023-11-16": {
+                "E95": "Keskiarvo\n1.971",
+                "E98": "Keskiarvo\n2.070",
+                "Diesel": "Keskiarvo\n2.064"
+            }
+        },
+        {
+            "2023-11-18": {
+                "E95": "Keskiarvo\n1.918",
+                "E98": "Keskiarvo\n2.012",
+                "Diesel": "Keskiarvo\n2.007"
+            }
+        },
+        {
+            "2023-11-20": {
+                "E95": "Keskiarvo\n1.896",
+                "E98": "Keskiarvo\n1.992",
+                "Diesel": "Keskiarvo\n1.991"
             }
         }
     ]

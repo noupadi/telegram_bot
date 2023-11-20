@@ -1,4 +1,5 @@
 /pat
 testfile.py
 token
-.gitignore
+.env
+fuel_data.json
